@@ -52,7 +52,7 @@ router.get('/', async (req, res, next) => {
       if (typeof tags !== 'undefined') { 
         filtro.tags = tags;
       }
-  
+      
       const docs = await Anuncio.listar(filtro, skip, limit, sort, fields); 
       
       res.json({ success: true, result: docs });  
@@ -70,10 +70,10 @@ router.get('/', async (req, res, next) => {
     const data = req.body;
     
     // creamos documento de Anuncio en memoria
-    const Anuncio = new Anuncio(data);
+    const anuncio = new Anuncio(data);
     
     // lo persistimos en la base de datos
-    Anuncio.save( async (err, AnuncioGuardado) => { // .save es método de instancia
+    anuncio.save( async (err, AnuncioGuardado) => { // .save es método de instancia
       if (err) {
         next(err);
         return;

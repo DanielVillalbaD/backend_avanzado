@@ -11,7 +11,8 @@ body {
   background: #F2F2F2;
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
-  font-size: 16px;    
+  font-size: 16px;
+  text-align: center;    
 }
 
 /*FILTERS*/
@@ -24,13 +25,58 @@ body {
   margin: 40px auto;
   align-content: center;
 }
+
 .filter-item {
   flex: 0 1 auto;
 }
+
+h1 {
+  margin: 80px 0 0 20px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
 h4 {
   color: #333;
   margin: 2rem 0 1rem 0;
 }
+
+footer {
+  width: 100%;
+  border-top: solid 1px #aaa;
+  text-align: center;
+}
+
+footer p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 4rem;
+}
+
+nav {
+  margin-bottom: 70px;
+}
+
+nav ul li {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.3rem;
+}
+
+nav ul li:hover {
+  color: #3c6e9d;
+}
+
+li.spacer {
+  font-size: 1.5rem;
+  padding: 0 1rem;
+  cursor: auto;
+}
+
+li.spacer:hover {
+  color: initial;
+}
+
 /* Reset Select */
 select {
   -webkit-appearance: none;
