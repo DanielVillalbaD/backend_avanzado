@@ -1,9 +1,9 @@
 
 # Nodepop
-Práctica Ads API
+Práctica Backend Avanzado
 ## Instalación
 ### Instalación Proyecto
-	$ git clone https://github.com/DanielVillalbaD/Nodepop.git
+	$ git clone https://github.com/DanielVillalbaD/backend_avanzado.git
 	$ npm install
 
 ### Arrancar el motor de BBDD MongoDB
@@ -58,6 +58,9 @@ Elimina un anuncio mediante su id.
 Actualiza un anuncio obtenido por su id según JSON pasado en body.	
 > Estructura JSON = Método POST
 > URL: http://localhost:3000/api/anuncios
+
+## NOTAS PARA EL PROFESOR
+Práctica sin finalizar al 100%, cumpliendo los requisitos mínimos pero con una funcionalidad mejorable, así como la limpieza del código (lo siento, ni yo me entero ya).
 
 ## NOTAS PROPIAS
 C:\Program Files\MongoDB\Server\3.6\bin
