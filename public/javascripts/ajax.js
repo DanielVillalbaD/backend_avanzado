@@ -1,5 +1,6 @@
 var xhr = new XMLHttpRequest();
 var url = "http://localhost:3000/api/anuncios?";
+var authUrl = "http://localhost:3000/api/auth"
 
 var tipo = document.getElementById('bytype');
 var etiqueta = document.querySelector('#bytag');
@@ -22,7 +23,57 @@ var booleanprice = false;
 var booleantag = false;
 var skipcount = 0;
 
+/*xhr.open("POST", authUrl, true);
 
+var params = "email=admin@example.com&password=1234";    
+
+xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+
+xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == 4 && xhr.status == 200) {
+        var response = JSON.parse(xhr.response);
+        console.log(response.result);
+    }
+}
+xhr.send(params);*/
+//para el formulario de login.
+$(document).ready(function() {
+
+    $('form#login-form').submit(function(event){
+
+        //recogemos los valores del formulario
+        var formData = {
+            'email': $('input[name=email]').val(),
+            'password': $('input[name=password]').val()
+        };
+
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": authUrl,
+          "method": "POST",
+          "headers": {
+            "content-type": "application/x-www-form-urlencoded"
+          },
+          "data": formData
+        }
+
+        $.ajax(settings).done(function (response) {
+          if(response.ok){
+            //credenciales válidas
+            window.location.href = "/";
+          }
+          else{
+            //Mostramos mensaje de error
+            $('.error').html('Contraseña incorrecta');
+
+          }
+        });
+
+        event.preventDefault();
+    });
+});
 
 function typeChange() {   
     var vtipo = tipo.options[tipo.selectedIndex].value;
@@ -142,11 +193,12 @@ function getData() {
         and5 = '&';
     }
 
-    url = url + 'limit=6&' + tipourl + and1 + tagsurl + and2 + nameurl + and3 + priceurl + and4 + skipurl + and5;
+    url = url + 'limit=6&' + tipourl + and1 + tagsurl + and2 + nameurl + and3 + priceurl + and4 + skipurl + and5;    
+
     console.log(url);
     xhr.open("GET", url, true);
 
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             var response = JSON.parse(xhr.response);
             var children = "";
@@ -188,7 +240,7 @@ function getData() {
         }
     };
 
-    xhr.send ();
+    xhr.send();
 }
 
 /*

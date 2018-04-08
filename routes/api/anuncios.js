@@ -5,7 +5,8 @@ const router = express.Router();
 
 const Anuncio = require('../../models/Anuncio');
 
-router.get('/', async (req, res, next) => { 
+// Listado de anuncios JSON
+router.get('/', async (req, res, next) => {
 
     try {
   

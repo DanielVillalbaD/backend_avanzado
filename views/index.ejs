@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Daniel Villalba Durán">
-    <meta name="description" content="Freak Currículum Vítae de Daniel Villalba. Creado como segunda práctica del Bootcamp de Keep Coding.">
+    <meta name="description" content="NodePOP es el wallapop de los pobres, pobres porque no sabes cuando funcionará.">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -15,42 +15,46 @@
 
     <h1><%= title %></h1>
 
+    <% getLocales().forEach( lang => { %>     
+      <a href="/lang/<%= lang %>"> <%= lang %> </a>
+      <% }) %>
+
     <container class="filter-flex">
   
       <div class="filter-item">  
-        <h4>Filtrar por tipo:</h4>
+        <h4><%= __('Filtrar por tipo') %>:</h4>
         <div class="select">
           <select name="bytype" id="bytype">
-            <option value="0">Todas las opciones</option>
-            <option value="1">Quiero comprar</option>
-            <option value="2">Quiero vender</option>
+            <option value="0"><%= __('Todas las opciones') %></option>
+            <option value="1"><%= __('Quiero comprar') %></option>
+            <option value="2"><%= __('Quiero vender') %></option>
           </select>
         </div>  
       </div>
         
         <div class="filter-item">  
-        <h4>Filtrar por etiquetas:</h4>
+        <h4><%= __('Filtrar por etiquetas') %>:</h4>
         <div class="select">
           <select name="bytag" id="bytag">
-            <option value="0">Todas las opciones</option>
-            <option value="1">Lifestyle</option>
-            <option value="2">Mobile</option>
-            <option value="3">Work</option>
-            <option value="4">Motor</option>
+            <option value="0"><%= __('Todas las opciones') %></option>
+            <option value="1"><%= __('Lifestyle') %></option>
+            <option value="2"><%= __('Mobile') %></option>
+            <option value="3"><%= __('Work') %></option>
+            <option value="4"><%= __('Motor') %></option>
           </select>
         </div>  
       </div>
         
         <div class="filter-item">  
-        <h4>Filtrar por nombre:</h4>
+        <h4><%= __('Filtrar por nombre') %>:</h4>
           <input type="text" id="byname">
         </div>  
       </div>
       
         <div class="filter-item">  
-        <h4>Filtrar por precio:</h4>
-            <input type="text" class="priceinput" id="minprice" placeholder="Precio Mínimo">
-            <input type="text" class="priceinput" id="maxprice" placeholder="Precio Máximo">
+        <h4><%= __('Filtrar por precio') %>:</h4>
+            <input type="text" class="priceinput" id="minprice" placeholder="<%= __('Precio Mínimo') %>">
+            <input type="text" class="priceinput" id="maxprice" placeholder="<%= __('Precio Máximo') %>">
             <button>GO</button>
         </div>  
       </div>
@@ -61,9 +65,9 @@
 
     <nav>
         <ul>
-          <li class="prev">Anteriores</li>
+          <li class="prev"><%= __('Anteriores') %></li>
           <li class="spacer"> | </li>
-          <li class="next">Siguientes</li>
+          <li class="next"><%= __('Siguientes') %></li>
         </ul>
     </nav>
 
@@ -71,5 +75,6 @@
 
   <footer>
     <p>Keep Coding Exercise by Daniel Villalba Durán</p>
+    <script src="/javascripts/jquery.js"></script>
     <script src="/javascripts/ajax.js"></script>
   </footer>

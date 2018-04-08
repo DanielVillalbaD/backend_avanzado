@@ -5,10 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-require('./lib/connectMongoose');
+const MongoStore = require('connect-mongo');
+
+const jwtAuth = require('./lib/jwtAuth');
+const tokenAuth = require('./lib/tokenAuth'); 
+
+const loginController = require('./routes/loginController');
+
+const conn = require('./lib/connectMongoose');
 require('./models/Anuncio');
+const Usuario = require('./models/Usuario');
 
 var app = express();
+
+var index = require('./routes/index');
+var users = require('./routes/users');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,23 +35,47 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next) {
+// Configuramos multiidioma en express
+const i18n = require('./lib/i18nConfigure')();
+app.use(i18n.init);
 
-  //console.log('peticion', req.path);
+/**
+ * Middlewares de mi api
+ */
 
-  // o respondemos o llamamos a next (obligatoriamente)
-  //res.send('hola caracola');
-  next();
+/*// middleware de control de sesiones
+app.use(session({
+  name: 'nodepop-session',
+  secret: 'askjdahjdhakdhaskdas7dasd87asd89as7d89asd7a9s8dhjash',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true }, //Inactividad
+  store: new MongoStore({
+    // como conectarse a mi base de datos
+    url: 'mongodb://localhost/nodepop' 
+  })
+}));*/
 
-  // podemos forzar el saltar los siguientes e ir al middleware de error directamente
-  //next(new Error('se te ha olvidao poner el cif'));
-});
+/**
+ * Middlewares de la API
+ */
+
+app.post('/api/auth', loginController.postLoginJWT);
+app.use('/api/anuncios', jwtAuth(), require('./routes/api/anuncios'));
 
 
-app.use('/', require('./routes/index'));
+/**
+ * Middlewares de la aplicación web
+ */
+app.use('/',      require('./routes/index'));
+app.use('/lang',  require('./routes/lang'));
 app.use('/users', require('./routes/users'));
-app.use('/api/anuncios', require('./routes/api/anuncios'));
 
+app.get('/login',  loginController.index);
+app.post('/login', loginController.postLoginJWT);
+app.get('/logout', loginController.logout);
+
+app.get('/',tokenAuth(),require('./routes/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,6 +83,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
