@@ -12,8 +12,12 @@ Práctica Backend Avanzado
 ### Instalación de la Base de Datos
 	$ npm run dbreset
 
+### Carga de usuario
+        $ npm run userreset
+
 ### Lanzar el API
 	$ npm run dev
+	Ir a localhost://http://localhost:3000/login para autentificar el usuario cargado en el paso anterior
 
 ## Documentación
 
@@ -61,6 +65,7 @@ Actualiza un anuncio obtenido por su id según JSON pasado en body.
 
 ## NOTAS PARA EL PROFESOR
 Práctica sin finalizar al 100%, cumpliendo los requisitos mínimos pero con una funcionalidad mejorable, así como la limpieza del código (lo siento, ni yo me entero ya).
+Por ejemplo, no consigo la redirección a /login si el token no existe o no es correcto.
 
 ## NOTAS PROPIAS
 C:\Program Files\MongoDB\Server\3.6\bin
