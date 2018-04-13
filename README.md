@@ -1,6 +1,8 @@
 
 # Nodepop
 Práctica Backend Avanzado
+## Actualización Abril 2018
+### Resultado: APTO
 ## Instalación
 ### Instalación Proyecto
 	$ git clone https://github.com/DanielVillalbaD/backend_avanzado.git
